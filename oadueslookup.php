@@ -47,7 +47,7 @@ function oadueslookup_enqueue_css()
 }
 
 global $oadueslookup_db_version;
-$oadueslookup_db_version = 3;
+$oadueslookup_db_version = 4;
 
 function oadueslookup_create_table($ddl)
 {
@@ -94,6 +94,7 @@ function oadueslookup_install()
 
     $sql = "CREATE TABLE ${dbprefix}dues_data (
   bsaid                 INT NOT NULL,
+  last_name             VARCHAR(45),
   max_dues_year         VARCHAR(4),
   dues_paid_date        DATE,
   level                 VARCHAR(12),
@@ -104,6 +105,27 @@ function oadueslookup_install()
   PRIMARY KEY (bsaid)
 );";
     oadueslookup_create_table($sql);
+
+    $sql = "CREATE TABLE `${dbprefix}member_cards` (
+  `bsaid`               int(11) NOT NULL,
+  `dues_year`           int(11) NOT NULL,
+  `card_printed`        tinyint(4) NOT NULL,
+  `first_name`          varchar(45) DEFAULT NULL,
+  `middle_name`         varchar(45) DEFAULT NULL,
+  `last_name`           varchar(45) DEFAULT NULL,
+  `suffix`              varchar(45) DEFAULT NULL,
+  `nickname`            varchar(45) DEFAULT NULL,
+  `level`               varchar(45) DEFAULT NULL,
+  `ordeal_date`         datetime DEFAULT NULL,
+  `brotherhood_date`    datetime DEFAULT NULL,
+  `vigil_date`          datetime DEFAULT NULL,
+  `unit_type`           varchar(10) DEFAULT NULL,
+  `unit_number`         int(11) DEFAULT NULL,
+  `unit_desig`          varchar(3) DEFAULT NULL,
+  PRIMARY KEY           (`bsaid`,`dues_year`)
+);";
+    oadueslookup_create_table($sql);
+
 
     //
     // DATABASE UPDATE CODE
@@ -141,6 +163,13 @@ function oadueslookup_install()
         $wpdb->query("ALTER TABLE ${dbprefix}dues_data ADD COLUMN bsa_reg_overridden TINYINT(1)");
         $wpdb->query("ALTER TABLE ${dbprefix}dues_data ADD COLUMN bsa_verify_date DATE");
         $wpdb->query("ALTER TABLE ${dbprefix}dues_data ADD COLUMN bsa_verify_status VARCHAR(50)");
+    }
+
+    if ($installed_version < 4) {
+        # Add last name field to dues_data table
+        $wpdb->query("ALTER TABLE `${dbprefix}dues_data` ADD COLUMN `last_name` VARCHAR(45) NULL AFTER `bsaid`");
+        # The member_cards table gets added with this version as well, that will
+        # get covered by the initial schema creation code since it doesn't exist yet
     }
 
     // insert next database revision update code immediately above this line.
