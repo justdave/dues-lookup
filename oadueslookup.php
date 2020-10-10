@@ -252,3 +252,4 @@ function oadueslookup_install_data()
 
 require_once("includes/user-facing-lookup-page.php");
 require_once("includes/management-options-page.php");
+require_once("includes/card-printer.php");

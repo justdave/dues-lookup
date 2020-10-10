@@ -1,6 +1,5 @@
 <?php
 
-require "vendor/autoload.php";
 use Dompdf\Dompdf;
 
 add_shortcode( 'oa-card-printer', 'oadueslookup_card_printer' );
@@ -100,7 +99,7 @@ Choose which dues year to print:<br>
             else {
                 # TODO: failed to find any dues years.
             }
-
+        }
     }
     elseif ($action == 'print') {
         # full_name picked by radio buttons from available formats on pre-print screen (w/ or wo middle name, nick name, etc)
@@ -142,9 +141,9 @@ function oadueslookup_print_card(
     $duesyear = "2019")
 {
 
-    $secretary = "Kyle Peters",
-    $expires = "12/31/${duesyear}",
-    $cardrev = "2013");
+    $secretary = "Kyle Peters";
+    $expires = "12/31/${duesyear}";
+    $cardrev = "2013";
     if (2018 < $duesyear) {
         $cardrev = "2018";
     }
