@@ -28,5 +28,5 @@ jobs:
         omitNameDuringUpdate: true
         omitPrereleaseDuringUpdate: true
         tag: ${{ steps.lasttag.outputs.tag }}
-        artifacts: "dues-lookup-${{ steps.lasttag.outputs.tag }}.zip"
+        artifacts: "../dues-lookup-${{ steps.lasttag.outputs.tag }}.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
