@@ -18,7 +18,7 @@ jobs:
       with:
         type: 'zip'
         filename: "dues-lookup-${{ steps.lasttag.outputs.tag }}.zip"
-        exclusions: 'dues-lookup/DOCKER_ENV dues-lookup/docker_tag dues-lookup/output.log'
+        exclusions: 'dues-lookup/DOCKER_ENV dues-lookup/docker_tag dues-lookup/output.log dues-lookup/.git*'
         directory: '..'
         path: 'dues-lookup'
     - uses: ncipollo/release-action@v1
