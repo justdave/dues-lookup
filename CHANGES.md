@@ -1,4 +1,4 @@
-#### unreleased changes
+#### 2.7.1 / 2026-08-11
 
 * Fix a crash caused by dependencies getting checked before `plugins_loadad`
 
