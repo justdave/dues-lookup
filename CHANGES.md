@@ -1,3 +1,7 @@
+#### unreleased changes
+
+* Fix a crash caused by dependencies getting checked before `plugins_loadad`
+
 #### 2.7 / 2026-08-10
 
 * Security updates to embedded libraries

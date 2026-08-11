@@ -33,7 +33,6 @@
  */
 
 include_once( __DIR__ . '/vendor/autoload.php' );
-WP_Dependency_Installer::instance()->run( __DIR__ );
 add_action('plugins_loaded', 'oadueslookup_update_db_check');
 add_action('wp_loaded', 'oadueslookup_update_shortcodes');
 register_activation_hook(__FILE__, 'oadueslookup_install');
@@ -164,6 +163,10 @@ function oadueslookup_install()
 
 function oadueslookup_update_db_check()
 {
+    // check if dependencies are installed, and if not, install them.
+    WP_Dependency_Installer::instance( __DIR__ )->run();
+
+    // check if the database schema version is current, and if not, run the update code.
     global $oadueslookup_db_version;
     if (get_site_option("oadueslookup_db_version") != $oadueslookup_db_version) {
         oadueslookup_install();
