@@ -41,7 +41,7 @@ add_action('wp_enqueue_scripts', 'oadueslookup_enqueue_css');
 
 function oadueslookup_enqueue_css()
 {
-    wp_register_style('oadueslookup-style', plugins_url('style.css', __FILE__));
+    wp_register_style('oadueslookup-style', plugins_url('style.css', __FILE__), array(), filemtime(__DIR__ . '/style.css'));
     wp_enqueue_style('oadueslookup-style');
 }
 
