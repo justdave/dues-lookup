@@ -23,6 +23,8 @@
     <properties>
       <property name="prefixes" type="array">
         <element value="oadueslookup"/>
+        <element value="oalm"/>
+        <element value="oa_tools"/>
       </property>
     </properties>
   </rule>
